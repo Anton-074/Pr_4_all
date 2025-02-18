@@ -19,7 +19,7 @@ namespace Pr_4
         {
             InitializeComponent();
         }
-        protected override void OnLoad(EventArgs e)
+        protected override void OnLoad(EventArgs e)//
         {
             base.OnLoad(e);
             this.db = new SubsystemPartnersContext();
