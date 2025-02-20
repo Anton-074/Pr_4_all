@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             panelTop = new Panel();
-            comboBox1 = new ComboBox();
             buttonDelete = new Button();
             buttonEdit = new Button();
             buttonAdd = new Button();
             labelListPartners = new Label();
+            comboBox1 = new ComboBox();
             panelFill = new Panel();
             dataGridViewType = new DataGridView();
             panelTop.SuspendLayout();
@@ -53,14 +53,6 @@
             panelTop.Padding = new Padding(10);
             panelTop.Size = new Size(800, 77);
             panelTop.TabIndex = 1;
-            // 
-            // comboBox1
-            // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(43, 327);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(526, 23);
-            comboBox1.TabIndex = 4;
             // 
             // buttonDelete
             // 
@@ -91,6 +83,8 @@
             buttonAdd.TabIndex = 1;
             buttonAdd.Text = "Добавить";
             buttonAdd.UseVisualStyleBackColor = true;
+            buttonAdd.Click += buttonAdd_Click;
+            buttonAdd.MouseDown += buttonAdd_MouseDown;
             // 
             // labelListPartners
             // 
@@ -102,6 +96,14 @@
             labelListPartners.TabIndex = 0;
             labelListPartners.Text = "Партнеры";
             labelListPartners.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // comboBox1
+            // 
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new Point(43, 327);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(526, 23);
+            comboBox1.TabIndex = 4;
             // 
             // panelFill
             // 

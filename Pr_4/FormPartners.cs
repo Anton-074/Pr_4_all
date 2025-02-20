@@ -37,9 +37,6 @@ namespace Pr_4
 
             dataGridViewType.Columns["Id"].Visible = false;
 
-            
-
-
 
         }
 
@@ -49,10 +46,20 @@ namespace Pr_4
             this.db.TypePartners.Load();
             foreach (TypePartner type in db.TypePartners.Local.OrderBy(o => o.TypeOfPartner).ToList())
             {
-                
+
                 comboBox1.Items.Add(type.TypeOfPartner.ToString());
             }
             comboBox1.DataSource = db.TypePartners.Local.OrderBy(o => o.TypeOfPartner).ToList();
+        }
+
+        private void buttonAdd_MouseDown(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void buttonAdd_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

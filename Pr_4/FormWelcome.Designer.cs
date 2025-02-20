@@ -30,10 +30,11 @@
         {
             panelFill = new Panel();
             panel1 = new Panel();
+            buttonPartners = new Button();
             buttonTypeProduct = new Button();
             label = new Label();
             buttonTypePartner = new Button();
-            buttonPartners = new Button();
+            button1 = new Button();
             panelFill.SuspendLayout();
             panel1.SuspendLayout();
             SuspendLayout();
@@ -45,20 +46,34 @@
             panelFill.Dock = DockStyle.Fill;
             panelFill.Location = new Point(0, 0);
             panelFill.Name = "panelFill";
-            panelFill.Size = new Size(346, 396);
+            panelFill.Size = new Size(346, 466);
             panelFill.TabIndex = 0;
             // 
             // panel1
             // 
             panel1.BackColor = Color.Transparent;
+            panel1.Controls.Add(button1);
             panel1.Controls.Add(buttonPartners);
             panel1.Controls.Add(buttonTypeProduct);
             panel1.Controls.Add(label);
             panel1.Controls.Add(buttonTypePartner);
             panel1.Location = new Point(62, 38);
             panel1.Name = "panel1";
-            panel1.Size = new Size(218, 346);
+            panel1.Size = new Size(218, 404);
             panel1.TabIndex = 3;
+            // 
+            // buttonPartners
+            // 
+            buttonPartners.BackColor = Color.Firebrick;
+            buttonPartners.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            buttonPartners.ForeColor = Color.White;
+            buttonPartners.Location = new Point(25, 260);
+            buttonPartners.Name = "buttonPartners";
+            buttonPartners.Size = new Size(170, 55);
+            buttonPartners.TabIndex = 3;
+            buttonPartners.Text = "Партнеры";
+            buttonPartners.UseVisualStyleBackColor = false;
+            buttonPartners.Click += buttonPartners_Click;
             // 
             // buttonTypeProduct
             // 
@@ -99,24 +114,24 @@
             buttonTypePartner.UseVisualStyleBackColor = false;
             buttonTypePartner.Click += buttonTypePartner_Click;
             // 
-            // buttonPartners
+            // button1
             // 
-            buttonPartners.BackColor = Color.Firebrick;
-            buttonPartners.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            buttonPartners.ForeColor = Color.White;
-            buttonPartners.Location = new Point(25, 260);
-            buttonPartners.Name = "buttonPartners";
-            buttonPartners.Size = new Size(170, 55);
-            buttonPartners.TabIndex = 3;
-            buttonPartners.Text = "Партнеры";
-            buttonPartners.UseVisualStyleBackColor = false;
-            buttonPartners.Click += buttonPartners_Click;
+            button1.BackColor = Color.Firebrick;
+            button1.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            button1.ForeColor = Color.White;
+            button1.Location = new Point(25, 337);
+            button1.Name = "button1";
+            button1.Size = new Size(170, 55);
+            button1.TabIndex = 4;
+            button1.Text = "Панели";
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
             // 
             // FormWelcome
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(346, 396);
+            ClientSize = new Size(346, 466);
             Controls.Add(panelFill);
             Name = "FormWelcome";
             StartPosition = FormStartPosition.CenterScreen;
@@ -134,5 +149,6 @@
         private Label label;
         private Button buttonTypePartner;
         private Button buttonPartners;
+        private Button button1;
     }
 }

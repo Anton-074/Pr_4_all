@@ -34,5 +34,11 @@ namespace Pr_4
             FormPartners form = new();
             form.ShowDialog();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            FormMain form = new();
+            form.ShowDialog();
+        }
     }
 }
