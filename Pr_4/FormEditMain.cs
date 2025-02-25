@@ -18,34 +18,6 @@ namespace Pr_4
             InitializeComponent();
         }
 
-        private void textBoxTypes_TextChanged(object sender, EventArgs e)
-        {
-            if (String.IsNullOrEmpty(textBoxTypes.Text))
-            {
-                errorProvider.SetError(textBoxTypes, msgError);
-                buttonSave.Enabled = false;
-            }
-            else
-            {
-                errorProvider.Clear();
-                buttonSave.Enabled = true;
-            }
-        }
-
-        private void textBoxTypes_Validating(object sender, CancelEventArgs e)
-        {
-            if (String.IsNullOrEmpty(textBoxTypes.Text))
-            {
-                errorProvider.SetError(textBoxTypes, msgError);
-                buttonSave.Enabled = false;
-            }
-            else
-            {
-                errorProvider.Clear();
-                buttonSave.Enabled = true;
-            }
-        }
-
         private void textBoxNamePartner_TextChanged(object sender, EventArgs e)
         {
             if (String.IsNullOrEmpty(textBoxNamePartner.Text))

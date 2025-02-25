@@ -30,19 +30,19 @@
         {
             components = new System.ComponentModel.Container();
             panelFill = new Panel();
-            textBoxTypes = new TextBox();
-            label = new Label();
-            panelBut = new Panel();
-            buttonSave = new Button();
-            buttonCancel = new Button();
-            textBoxNamePartner = new TextBox();
-            label1 = new Label();
+            comboBoxType = new ComboBox();
+            textBoxRating = new TextBox();
+            labelRating = new Label();
             textBoxPhone = new TextBox();
             label2 = new Label();
             textBoxNameDirector = new TextBox();
             label3 = new Label();
-            textBoxRating = new TextBox();
-            labelRating = new Label();
+            textBoxNamePartner = new TextBox();
+            label1 = new Label();
+            label = new Label();
+            panelBut = new Panel();
+            buttonSave = new Button();
+            buttonCancel = new Button();
             errorProvider = new ErrorProvider(components);
             panelFill.SuspendLayout();
             panelBut.SuspendLayout();
@@ -51,6 +51,7 @@
             // 
             // panelFill
             // 
+            panelFill.Controls.Add(comboBoxType);
             panelFill.Controls.Add(textBoxRating);
             panelFill.Controls.Add(labelRating);
             panelFill.Controls.Add(textBoxPhone);
@@ -59,84 +60,41 @@
             panelFill.Controls.Add(label3);
             panelFill.Controls.Add(textBoxNamePartner);
             panelFill.Controls.Add(label1);
-            panelFill.Controls.Add(textBoxTypes);
             panelFill.Controls.Add(label);
             panelFill.Controls.Add(panelBut);
             panelFill.Dock = DockStyle.Fill;
             panelFill.Location = new Point(0, 0);
             panelFill.Name = "panelFill";
-            panelFill.Size = new Size(549, 523);
+            panelFill.Size = new Size(549, 585);
             panelFill.TabIndex = 1;
             // 
-            // textBoxTypes
+            // comboBoxType
             // 
-            textBoxTypes.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            textBoxTypes.Location = new Point(37, 52);
-            textBoxTypes.Name = "textBoxTypes";
-            textBoxTypes.Size = new Size(487, 33);
-            textBoxTypes.TabIndex = 2;
-            textBoxTypes.TextChanged += textBoxTypes_TextChanged;
-            textBoxTypes.Validating += textBoxTypes_Validating;
+            comboBoxType.Font = new Font("Segoe UI", 14F);
+            comboBoxType.FormattingEnabled = true;
+            comboBoxType.Location = new Point(37, 52);
+            comboBoxType.Name = "comboBoxType";
+            comboBoxType.Size = new Size(487, 33);
+            comboBoxType.TabIndex = 11;
             // 
-            // label
+            // textBoxRating
             // 
-            label.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            label.Location = new Point(37, 12);
-            label.Name = "label";
-            label.Size = new Size(487, 37);
-            label.TabIndex = 1;
-            label.Text = "Тип";
+            textBoxRating.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            textBoxRating.Location = new Point(37, 404);
+            textBoxRating.Name = "textBoxRating";
+            textBoxRating.Size = new Size(487, 33);
+            textBoxRating.TabIndex = 10;
+            textBoxRating.TextChanged += textBoxRating_TextChanged;
+            textBoxRating.Validating += textBoxRating_Validating;
             // 
-            // panelBut
+            // labelRating
             // 
-            panelBut.Controls.Add(buttonSave);
-            panelBut.Controls.Add(buttonCancel);
-            panelBut.Dock = DockStyle.Bottom;
-            panelBut.Location = new Point(0, 448);
-            panelBut.Name = "panelBut";
-            panelBut.Size = new Size(549, 75);
-            panelBut.TabIndex = 0;
-            // 
-            // buttonSave
-            // 
-            buttonSave.DialogResult = DialogResult.OK;
-            buttonSave.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            buttonSave.Location = new Point(342, 18);
-            buttonSave.Name = "buttonSave";
-            buttonSave.Size = new Size(119, 36);
-            buttonSave.TabIndex = 1;
-            buttonSave.Text = "Сохранить";
-            buttonSave.UseVisualStyleBackColor = true;
-            // 
-            // buttonCancel
-            // 
-            buttonCancel.DialogResult = DialogResult.Cancel;
-            buttonCancel.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            buttonCancel.Location = new Point(83, 18);
-            buttonCancel.Name = "buttonCancel";
-            buttonCancel.Size = new Size(117, 36);
-            buttonCancel.TabIndex = 0;
-            buttonCancel.Text = "Отмена";
-            buttonCancel.UseVisualStyleBackColor = true;
-            // 
-            // textBoxNamePartner
-            // 
-            textBoxNamePartner.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            textBoxNamePartner.Location = new Point(37, 139);
-            textBoxNamePartner.Name = "textBoxNamePartner";
-            textBoxNamePartner.Size = new Size(487, 33);
-            textBoxNamePartner.TabIndex = 4;
-            textBoxNamePartner.TextChanged += textBoxNamePartner_TextChanged;
-            textBoxNamePartner.Validating += textBoxNamePartner_Validating;
-            // 
-            // label1
-            // 
-            label1.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            label1.Location = new Point(37, 99);
-            label1.Name = "label1";
-            label1.Size = new Size(487, 37);
-            label1.TabIndex = 3;
-            label1.Text = "Наименование партнера";
+            labelRating.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            labelRating.Location = new Point(37, 364);
+            labelRating.Name = "labelRating";
+            labelRating.Size = new Size(487, 37);
+            labelRating.TabIndex = 9;
+            labelRating.Text = "Рейтинг";
             // 
             // textBoxPhone
             // 
@@ -176,24 +134,65 @@
             label3.TabIndex = 5;
             label3.Text = "Директор";
             // 
-            // textBoxRating
+            // textBoxNamePartner
             // 
-            textBoxRating.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            textBoxRating.Location = new Point(37, 404);
-            textBoxRating.Name = "textBoxRating";
-            textBoxRating.Size = new Size(487, 33);
-            textBoxRating.TabIndex = 10;
-            textBoxRating.TextChanged += textBoxRating_TextChanged;
-            textBoxRating.Validating += textBoxRating_Validating;
+            textBoxNamePartner.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            textBoxNamePartner.Location = new Point(37, 139);
+            textBoxNamePartner.Name = "textBoxNamePartner";
+            textBoxNamePartner.Size = new Size(487, 33);
+            textBoxNamePartner.TabIndex = 4;
+            textBoxNamePartner.TextChanged += textBoxNamePartner_TextChanged;
+            textBoxNamePartner.Validating += textBoxNamePartner_Validating;
             // 
-            // labelRating
+            // label1
             // 
-            labelRating.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            labelRating.Location = new Point(37, 364);
-            labelRating.Name = "labelRating";
-            labelRating.Size = new Size(487, 37);
-            labelRating.TabIndex = 9;
-            labelRating.Text = "Рейтинг";
+            label1.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            label1.Location = new Point(37, 99);
+            label1.Name = "label1";
+            label1.Size = new Size(487, 37);
+            label1.TabIndex = 3;
+            label1.Text = "Наименование партнера";
+            // 
+            // label
+            // 
+            label.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            label.Location = new Point(37, 12);
+            label.Name = "label";
+            label.Size = new Size(487, 37);
+            label.TabIndex = 1;
+            label.Text = "Тип";
+            // 
+            // panelBut
+            // 
+            panelBut.Controls.Add(buttonSave);
+            panelBut.Controls.Add(buttonCancel);
+            panelBut.Dock = DockStyle.Bottom;
+            panelBut.Location = new Point(0, 510);
+            panelBut.Name = "panelBut";
+            panelBut.Size = new Size(549, 75);
+            panelBut.TabIndex = 0;
+            // 
+            // buttonSave
+            // 
+            buttonSave.DialogResult = DialogResult.OK;
+            buttonSave.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            buttonSave.Location = new Point(342, 18);
+            buttonSave.Name = "buttonSave";
+            buttonSave.Size = new Size(119, 36);
+            buttonSave.TabIndex = 1;
+            buttonSave.Text = "Сохранить";
+            buttonSave.UseVisualStyleBackColor = true;
+            // 
+            // buttonCancel
+            // 
+            buttonCancel.DialogResult = DialogResult.Cancel;
+            buttonCancel.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            buttonCancel.Location = new Point(83, 18);
+            buttonCancel.Name = "buttonCancel";
+            buttonCancel.Size = new Size(117, 36);
+            buttonCancel.TabIndex = 0;
+            buttonCancel.Text = "Отмена";
+            buttonCancel.UseVisualStyleBackColor = true;
             // 
             // errorProvider
             // 
@@ -203,9 +202,10 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(549, 523);
+            ClientSize = new Size(549, 585);
             Controls.Add(panelFill);
             Name = "FormEditMain";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "FormEditMain";
             panelFill.ResumeLayout(false);
             panelFill.PerformLayout();
@@ -225,11 +225,11 @@
         public Label label3;
         public TextBox textBoxNamePartner;
         public Label label1;
-        public TextBox textBoxTypes;
         public Label label;
         private Panel panelBut;
         private Button buttonSave;
         private Button buttonCancel;
         private ErrorProvider errorProvider;
+        public ComboBox comboBoxType;
     }
 }
