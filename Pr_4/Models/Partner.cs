@@ -24,7 +24,8 @@ public partial class Partner
     public float Rating { get; set; }
 
 
-    public virtual TypePartner IdTypePartnerNavigation { get; set; } = null!;
+
+    public virtual TypePartner TypePartner { get; set; } = null!;
 
     public virtual ICollection<PartnersProduct> PartnersProducts { get; set; } = new List<PartnersProduct>();
 }

@@ -17,10 +17,11 @@ namespace Pr_4
     public partial class FormMain : Form
     {
         private SubsystemPartnersContext? db;
-       
+
         public FormMain()
         {
             InitializeComponent();
+
         }
         protected override void OnLoad(EventArgs e)//
         {
@@ -29,6 +30,13 @@ namespace Pr_4
         private void FormMain_Load(object sender, EventArgs e)
         {
             GeneratePanel();
+            contextMenuStrip = new ContextMenuStrip();
+            ToolStripMenuItem menuEdit = new ToolStripMenuItem("Редактировать");
+            ToolStripMenuItem menuShow = new ToolStripMenuItem("Смотреть историю");
+            menuEdit.Click += MenuEdit_Click; // Подписка на событие клика
+            menuShow.Click += MenuShow_Click;
+            contextMenuStrip.Items.Add(menuEdit);
+            contextMenuStrip.Items.Add(menuShow);
         }
         private void GeneratePanel()
         {
@@ -37,7 +45,7 @@ namespace Pr_4
             var type = db.TypePartners.ToList();
 
 
-            int yOffset = 30;
+            int yOffset = 70;
             foreach (Partner u in partners)
             {
                 var typePartner = db.TypePartners.Where(w => w.Id == u.IdTypePartner).FirstOrDefault();
@@ -97,68 +105,156 @@ namespace Pr_4
             if (e.Button == MouseButtons.Right)
             {
                 Panel clickedPanel = sender as Panel;
-                if (clickedPanel != null) {
-                    int index=-1;
-                    short indexType=-1;
-                    int count = 0;
-
-                    var type = db.TypePartners.Local.OrderBy(o=>o.TypeOfPartner).ToList();
-                    string splits = (string)clickedPanel.Tag;
-                    string[] Ids = splits.Split(",", StringSplitOptions.RemoveEmptyEntries);
-                    int partnerId = Int32.Parse(Ids[0]);
-                    short typePartnerId = short.Parse(Ids[1]);
-
-                    TypePartner typePartner = db.TypePartners.Find(typePartnerId);
-                    Partner partner = db.Partners.Find(partnerId);
-
-
-                    
-                    FormEditMain form = new();
-                    
-                    form.textBoxNamePartner.Text = partner.NamePartner;
-                    form.textBoxNameDirector.Text = partner.DirectorFullName;
-                    form.textBoxPhone.Text = partner.Phone;
-                    form.textBoxRating.Text = $"{partner.Rating}";
-                    foreach(TypePartner u in type)
-                    {
-                        form.comboBoxType.Items.Add(u.TypeOfPartner);
-                       
-                        if (u.TypeOfPartner == typePartner.TypeOfPartner)
-                        {
-                            index = count;
-                            indexType = u.Id;
-                        }
-                        count++;
-                    }
-                    form.comboBoxType.SelectedIndex =index;
-
-                    DialogResult result = form.ShowDialog(this);
-
-                    if (result == DialogResult.Cancel)
-                        return;
-
-                    foreach (TypePartner u in type)
-                    {
-                        form.comboBoxType.Items.Add(u.TypeOfPartner);
-                        if (u.TypeOfPartner == form.comboBoxType.Text)
-                        {
-                            indexType = u.Id;
-                        }
-                    }
-                    partner.IdTypePartner = indexType;
-                    partner.NamePartner = form.textBoxNamePartner.Text;
-                    partner.DirectorFullName = form.textBoxNameDirector.Text;
-                    partner.Phone = form.textBoxPhone.Text;
-                    partner.Rating = Int32.Parse(form.textBoxRating.Text);
-
-                    db.SaveChanges();
-                    this.Hide();
-                    FormMain main = new FormMain();
-                    main.Show();
-
-                    FormMain_Load(sender, e);
+                if (clickedPanel != null)
+                {
+                    contextMenuStrip.Tag = clickedPanel; // Сохраняем ссылку на панель
+                    contextMenuStrip.Show(clickedPanel, e.Location);
                 }
             }
+        }
+        private void MenuShow_Click(object sender, EventArgs e)
+        {
+            Panel clickedPanel = contextMenuStrip.Tag as Panel;
+            if (clickedPanel != null)
+            {
+                string splits = (string)clickedPanel.Tag;
+                string[] Ids = splits.Split(",", StringSplitOptions.RemoveEmptyEntries);
+                int partnerId = Int32.Parse(Ids[0]);
+
+                var partner = db.Partners
+                    .Join(db.PartnersProducts,
+                          partner => partner.Id,
+                          partnerProduct => partnerProduct.IdPartner,
+                          (partner, partnerProduct) => new { Partner = partner, PartnerProduct = partnerProduct })
+                    .Where(x => x.PartnerProduct.IdPartner == partnerId);
+
+                FormShow form = new FormShow(partnerId);
+                form.Show();
+
+
+            }
+        }
+        private void MenuEdit_Click(object sender, EventArgs e)
+        {
+            Panel clickedPanel = contextMenuStrip.Tag as Panel; // Получаем панель из Tag
+            if (clickedPanel != null)
+            {
+                int index = -1;
+                short indexType = -1;
+                int count = 0;
+
+                var type = db.TypePartners.Local.OrderBy(o => o.TypeOfPartner).ToList();
+                string splits = (string)clickedPanel.Tag;
+                string[] Ids = splits.Split(",", StringSplitOptions.RemoveEmptyEntries);
+
+                int partnerId = Int32.Parse(Ids[0]);
+                short typePartnerId = short.Parse(Ids[1]);
+
+                TypePartner typePartner = db.TypePartners.Find(typePartnerId);
+                Partner partner = db.Partners.Find(partnerId);
+
+                
+
+
+                FormEditMain form = new();
+
+                form.textBoxNamePartner.Text = partner.NamePartner;
+                form.textBoxNameDirector.Text = partner.DirectorFullName;
+                form.textBoxPhone.Text = partner.Phone;
+                form.textBoxRating.Text = $"{partner.Rating}";
+                foreach (TypePartner u in type)
+                {
+                    form.comboBoxType.Items.Add(u.TypeOfPartner);
+
+                    if (u.TypeOfPartner == typePartner.TypeOfPartner)
+                    {
+                        index = count;
+                        indexType = u.Id;
+                    }
+                    count++;
+                }
+                form.comboBoxType.SelectedIndex = index;
+
+                DialogResult result = form.ShowDialog(this);
+
+                if (result == DialogResult.Cancel)
+                    return;
+
+                foreach (TypePartner u in type)
+                {
+                    form.comboBoxType.Items.Add(u.TypeOfPartner);
+                    if (u.TypeOfPartner == form.comboBoxType.Text)
+                    {
+                        indexType = u.Id;
+                    }
+                }
+                partner.IdTypePartner = indexType;
+                partner.NamePartner = form.textBoxNamePartner.Text;
+                partner.DirectorFullName = form.textBoxNameDirector.Text;
+                partner.Phone = form.textBoxPhone.Text;
+                partner.Rating = Int32.Parse(form.textBoxRating.Text);
+
+                db.SaveChanges();
+                this.Hide();
+                FormMain main = new FormMain();
+                main.Show();
+
+                FormMain_Load(sender, e);
+            }
+        }
+        
+
+        private void buttonAdd_Click(object sender, EventArgs e)
+        {
+            FormAddPanelPartner form = new FormAddPanelPartner();
+
+            short indexType = -1;
+
+            var type = db.TypePartners.Local.OrderBy(o => o.TypeOfPartner).ToList();
+
+
+
+            foreach (TypePartner u in type)
+            {
+                form.comboBoxType.Items.Add(u.TypeOfPartner);
+            }
+
+            DialogResult result = form.ShowDialog(this);
+
+            if (result == DialogResult.Cancel)
+                return;
+
+            foreach (TypePartner u in type)
+            {
+                if (u.TypeOfPartner == form.comboBoxType.Text)
+                {
+                    indexType = u.Id;
+                }
+            }
+
+            Partner partner = new Partner
+            {
+
+                IdTypePartner = indexType,
+                NamePartner = form.textBoxNamePartner.Text,
+                LegalAddress = form.textBoxAdress.Text,
+                Inn = form.textBoxINN.Text,
+                DirectorFullName = form.textBoxNameDirector.Text,
+                Phone = form.textBoxPhone.Text,
+                Email = form.textBoxEmail.Text,
+                Rating = Int32.Parse(form.textBoxRating.Text)
+            };
+            db.Partners.Add(partner);
+            db.SaveChanges();
+
+            MessageBox.Show("Новый объект добавлен");
+            this.Hide();
+            FormMain main = new FormMain();
+            main.Show();
+
+            FormMain_Load(sender, e);
+
+
         }
     }
 }

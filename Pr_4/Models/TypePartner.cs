@@ -9,5 +9,6 @@ public partial class TypePartner
 
     public string TypeOfPartner { get; set; } = null!;
 
+
     public virtual ICollection<Partner> Partners { get; set; } = new List<Partner>();
 }

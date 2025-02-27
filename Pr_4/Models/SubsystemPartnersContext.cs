@@ -37,7 +37,7 @@ public partial class SubsystemPartnersContext : DbContext
 
             entity.Property(e => e.Inn).HasColumnName("INN");
 
-            entity.HasOne(d => d.IdTypePartnerNavigation).WithMany(p => p.Partners)
+            entity.HasOne(d => d.TypePartner).WithMany(p => p.Partners)
                 .HasForeignKey(d => d.IdTypePartner)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_idtypePartner");
@@ -49,12 +49,12 @@ public partial class SubsystemPartnersContext : DbContext
 
             entity.ToTable("Partners_Products");
 
-            entity.HasOne(d => d.IdPartnerNavigation).WithMany(p => p.PartnersProducts)
+            entity.HasOne(d => d.Partner).WithMany(p => p.PartnersProducts)
                 .HasForeignKey(d => d.IdPartner)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_IdPartner");
 
-            entity.HasOne(d => d.IdProductNavigation).WithMany(p => p.PartnersProducts)
+            entity.HasOne(d => d.Product).WithMany(p => p.PartnersProducts)
                 .HasForeignKey(d => d.IdProduct)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_IdProduct");
@@ -66,7 +66,7 @@ public partial class SubsystemPartnersContext : DbContext
 
             entity.Property(e => e.MinCostForPartner).HasColumnType("money");
 
-            entity.HasOne(d => d.IdTypeOfProductNavigation).WithMany(p => p.Products)
+            entity.HasOne(d => d.TypeOfProduct).WithMany(p => p.Products)
                 .HasForeignKey(d => d.IdTypeOfProduct)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_IdTypeOfProduct");

@@ -15,7 +15,9 @@ public partial class Product
 
     public decimal MinCostForPartner { get; set; }
 
-    public virtual TypeOfProduct IdTypeOfProductNavigation { get; set; } = null!;
+
+
+    public virtual TypeOfProduct TypeOfProduct { get; set; } = null!;
 
     public virtual ICollection<PartnersProduct> PartnersProducts { get; set; } = new List<PartnersProduct>();
 }
